@@ -1,7 +1,6 @@
 /__pycache__/
 /.pytest_cache/
 /*tmp
-/coverage.data
-/coverage/
+/.coverage
 htmlcov/
 
