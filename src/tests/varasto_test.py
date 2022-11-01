@@ -4,7 +4,7 @@ from varasto import Varasto
 
 class TestVarasto(unittest.TestCase):
     def setUp(self):
-        self.varasto = Varasto(10)
+        self.varasto = Varasto(10, alku_saldo = 0)
 
     def test_konstruktori_luo_tyhjan_varaston(self):
         # https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertAlmostEqual
@@ -12,6 +12,14 @@ class TestVarasto(unittest.TestCase):
 
     def test_uudella_varastolla_oikea_tilavuus(self):
         self.assertAlmostEqual(self.varasto.tilavuus, 10)
+
+    def test_jos_uudella_varastolla_negatiivinen_saldo(self):
+        self.varasto = Varasto(10, alku_saldo = -5)
+        self.assertAlmostEqual(self.varasto.saldo, 0)
+
+    def test_jos_uudella_varastolla_sama_saldo_ja_tilavuus(self):
+        self.varasto = Varasto(10, alku_saldo = 10)
+        self.assertAlmostEqual(self.varasto.saldo, 10)
 
     def test_lisays_lisaa_saldoa(self):
         self.varasto.lisaa_varastoon(8)
@@ -76,3 +84,4 @@ class TestVarasto(unittest.TestCase):
         self.varasto.lisaa_varastoon(8)
 
         self.assertAlmostEqual(self.varasto.__str__(), "saldo = 8, vielä tilaa 2")
+
